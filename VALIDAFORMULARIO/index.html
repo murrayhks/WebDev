@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário de Exemplo</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <form action="processa.php" method="POST">
+            <h3>Cadastre-se</h3>
+            
+            <div class="form-group">
+               <label for="nome">NOME:</label>
+               <input type="text" id="nome" name="nome" placeholder="nome completo…">
+            </div>
+         
+            <div class="form-group">
+               <label for="email">E-MAIL:</label>
+               <input type="email" id="email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="data_nascimento">DATA DE NASCIMENTO:</label>
+                <input type="date" id="data_nascimento" name="data_nascimento">
+             </div>
+
+            <div class="form-group">
+                <label for="pais">PAÍS:</label>
+                <select id="pais" name="pais">
+                    <option value="br">BRASIL</option>
+                    <option value="us">ESTADOS UNIDOS</option>
+                    <option value="in">INDIA</option>
+                    <option value="de">ALEMÃNHA</option>
+                </select>
+            </div>
+         
+            <div class="form-group">
+               <label>HABILIDADES:</label>
+               <label for="html">
+                     <input type="checkbox" id="html" name="habilidades" value="HTML">HTML
+               </label>
+         
+                <label for="css">
+                    <input type="checkbox" id="css" name="habilidades" value="CSS">CSS
+                </label>
+         
+                <label for="js">
+                    <input type="checkbox" id="js" name="habilidades" value="JavaScript">JS
+                </label>
+
+                <label for="php">
+                    <input type="checkbox" id="php" name="habilidades" value="PHP">PHP
+                </label>
+
+            </div>
+         
+         
+            <div class="form-group">
+               <label for="comentarios">COMENTARIOS:</label><br>
+               <textarea id="comentarios" name="comentarios"></textarea>
+            </div>
+         
+            <div class="form-group">
+               <button type="submit">ENVIAR</button>
+            </div>
+
+          </form>
+    </body>
+</html>
