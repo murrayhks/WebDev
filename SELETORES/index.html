@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seletores</title>
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="titulo">Atividades de seletores</h1>
+        <button onclick="modificarTitulo()">Modificar Título</button>
+    </div>
+
+    <div class="container">
+        <p id="contador">0</p>
+        <button id="botaoContador">Clique aqui</button>
+    </div>
+
+    <div class="container">
+        <ul id="lista">
+            <li>Item 1</li>
+        </ul>
+        <button id="botaoAdicionar">Adicionar Item</button>
+    </div>
+
+    <div class="container">
+        <p id="nomeAventura"></p>
+        <button id="gerarNome">Gerar Nome de Aventura</button>
+    </div>
+
+    <div class="container">
+        <img id="imagem" src="miata.webp" alt="Miata" width="100">
+    </div>
+
+    <div class="container">
+        <input type="text" id="sabor" placeholder="Digite um sabor de sorvete">
+        <p id="resposta"></p>
+        <button id="modoEscuro">Modo Escuro</button>
+    </div>
+
+    <div class="container">
+        <form id="formCadastro">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <br>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+            <button type="button" id="revelarSenha">Mostrar Senha</button>
+            <br>
+            <label for="confirmarSenha">Confirmar Senha:</label>
+            <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+            <br>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        // 3
+        function modificarTitulo() {
+            const titulo = document.querySelector('#titulo');
+            titulo.textContent = 'Novo Título';
+            titulo.style.color = 'blue';
+            titulo.style.fontSize = '50px';
+        }
+
+        // 4
+        let contador = 0;
+        const paragrafoContador = document.querySelector('#contador');
+        const botaoContador = document.querySelector('#botaoContador');
+
+        botaoContador.addEventListener('click', () => {
+            contador++;
+            paragrafoContador.textContent = contador;
+        });
+
+        //5
+        const lista = document.querySelector('#lista');
+        const botaoAdicionar = document.querySelector('#botaoAdicionar');
+
+        botaoAdicionar.addEventListener('click', () => {
+            const novoItem = document.createElement('li');
+            novoItem.textContent = `Item ${lista.children.length + 1}`;
+            lista.appendChild(novoItem);
+        });
+
+        // 6
+        const titles = ["Sr.", "Mister", "Dom", "Lord", "Lady", "Capitão", "Dama"];
+        const names = ["Arthur", "Gwendolyn", "Merlin", "Lancelot", "Morgana", "Ragnar", "Éowyn"];
+        const classes = ["Mago", "Paladino", "Arqueiro", "Ladino", "Bárbaro", "Feiticeiro", "Cavaleiro"];
+        const locations = ["Valfenda", "Gondor", "Asgard", "Camelot", "Nárnia", "Babilônia", "Atlantis"];
+
+        const nomeAventura = document.querySelector('#nomeAventura');
+        const gerarNome = document.querySelector('#gerarNome');
+
+        gerarNome.addEventListener('click', () => {
+            const titulo = titles[Math.floor(Math.random() * titles.length)];
+            const nome = names[Math.floor(Math.random() * names.length)];
+            const classe = classes[Math.floor(Math.random() * classes.length)];
+            const local = locations[Math.floor(Math.random() * locations.length)];
+
+            nomeAventura.textContent = `${titulo} ${nome}, o ${classe} de ${local}`;
+        });
+
+   
+        const imagem = document.querySelector('#imagem');
+
+        imagem.addEventListener('mouseenter', () => {
+            imagem.title = 'Olá! Eu sou o MAZDA MIATA!!!';
+        });
+
+        imagem.addEventListener('mouseleave', () => {
+            imagem.title = 'Tchau!';
+        });
+
+        imagem.addEventListener('mousemove', (event) => {
+            console.log(`Mouse em: X=${event.clientX}, Y=${event.clientY}`);
+        });
+
+        imagem.addEventListener('click', () => {
+            alert('Você clicou no Miata!');
+        });
+
+        // Exercício 8 e 9: Verificação de texto digitado e modo escuro
+        const sabor = document.querySelector('#sabor');
+        const resposta = document.querySelector('#resposta');
+        const modoEscuro = document.querySelector('#modoEscuro');
+
+        sabor.addEventListener('input', () => {
+            if (sabor.value.length > 3) {
+                if (sabor.value.includes('tangerina', 'Tangerina', 'TANGERINA')) {
+                    resposta.textContent = 'Sorvete de tangerina! O melhor!';
+                } else if (sabor.value.includes('flocos')) {
+                    resposta.textContent = 'Sorvete de tangerina! O melhor!!!...';
+                } else {
+                    resposta.textContent = 'Boa escolha, mas é inferior ao de tangerina !!!...';
+                }
+            } else {
+                resposta.textContent = '';
+            }
+        });
+
+        modoEscuro.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        //  10
+        const formCadastro = document.querySelector('#formCadastro');
+
+        formCadastro.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const nome = document.querySelector('#nome').value;
+            const email = document.querySelector('#email').value;
+            const senha = document.querySelector('#senha').value;
+            const confirmarSenha = document.querySelector('#confirmarSenha').value;
+
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const senhaRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            if (nome.length < 3) {
+                alert('O nome deve ter pelo menos 3 caracteres.');
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um e-mail válido.');
+                return;
+            }
+
+            if (!senhaRegex.test(senha)) {
+                alert('A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.');
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não são iguais.');
+                return;
+            }
+
+            alert('Cadastro realizado com sucesso!');
+        });
+
+        //11
+        const revelarSenha = document.querySelector('#revelarSenha');
+        const campoSenha = document.querySelector('#senha');
+
+        revelarSenha.addEventListener('click', () => {
+            if (campoSenha.type === 'password') {
+                campoSenha.type = 'text';
+                revelarSenha.textContent = 'Ocultar Senha';
+            } else {
+                campoSenha.type = 'password';
+                revelarSenha.textContent = 'Mostrar Senha';
+            }
+        });
+    </script>
+</body>
+</html>
