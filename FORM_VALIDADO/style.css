@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.grupo {
+    margin-bottom: 15px;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input.invalido {
+    border-color: tomato;
+}
+.erro {
+    color: tomato;
+    font-size: 12px;
+    display: none;
+}
+.alternarSenha {
+    cursor: pointer;
+    margin-left: -25px;
+    position: absolute;
+}
+input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
