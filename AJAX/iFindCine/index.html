@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFind Cinema</title>
+    <style>
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #007bff;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 200px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>iFind Cinema</h1>
+            <input type="text" id="movieName" placeholder="Digite o nome do filme">
+            <button id="searchButton">Buscar</button>
+            <h2>Lista de filmes buscados</h2>
+            <div id="results"></div>
+        </div>
+    </main>
+
+    <script>
+        let button = document.getElementById('searchButton');
+        button.addEventListener('click', () => {
+            let movieName = document.getElementById('movieName').value;
+            cineFind(movieName);
+        });
+
+        function cineFind(movieName) {
+            const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=2dbca7a779fef19d8dc0acc77384df5a&query=${movieName}&language=pt-BR`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+
+                    if (data.results.length > 0) {
+                        const movie = data.results[0];
+                        resultsDiv.innerHTML = `
+                            <h2>${movie.title}</h2>
+                            <p>${movie.overview}</p>
+                            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+                        `;
+                    } else {
+                        resultsDiv.innerHTML = '<p>Filme não encontrado.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
+    </script>
+</body>
+</html>
